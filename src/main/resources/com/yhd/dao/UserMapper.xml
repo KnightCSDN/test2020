@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhd.dao.UserMapper">
+    <sql id="sql">select * from user</sql>
+    <select id="selectAllUser" resultType="user">
+    <include refid="sql"></include>
+    </select>
+
+    <resultMap id="userMap" type="user">
+        <id property="id" column="id"/>
+        <result property="name" column="username"/>
+        <result property="pass" column="pass"/>
+        <result property="tel" column="tel"/>
+        <result property="qq" column="tel"/>
+        <result property="wechat" column="wechat"/>
+    </resultMap>
+    <select id="selectLikeName" resultMap="userMap">
+        <include refid="sql"></include> where username like '%' #{name} '%'
+    </select>
+</mapper>
